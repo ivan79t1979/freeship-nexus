@@ -43,14 +43,21 @@ export function AuthProvider({ children }) {
   };
 
   const register = async (email, password) => {
-    const response = await axios.post('/api/auth/register', { email, password });
-    const { token, user } = response.data;
-    
-    localStorage.setItem('token', token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    setUser(user);
-    
-    return response.data;
+    try {
+      const response = await axios.post('/api/auth/register', { email, password });
+      const { token, user } = response.data;
+      
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setUser(user);
+      
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        throw new Error(error.response.data.error);
+      }
+      throw new Error('Registration failed');
+    }
   };
 
   const logout = () => {

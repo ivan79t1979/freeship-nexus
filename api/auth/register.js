@@ -1,4 +1,4 @@
-import { User } from '../../../lib/database.js';
+import { User, initializeDatabase } from '../../../lib/database.js';
 import { generateToken } from '../../../lib/auth.js';
 
 export default async function handler(req, res) {
@@ -7,6 +7,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    await initializeDatabase();
     const { email, password } = req.body;
 
     if (!email || !password) {

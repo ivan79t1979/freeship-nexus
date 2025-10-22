@@ -22,7 +22,7 @@ const Login = () => {
         await register(email, password);
       }
     } catch (err) {
-      setError(err.response?.data?.error || 'Authentication failed');
+      setError(err.message || 'Authentication failed');
     } finally {
       setLoading(false);
     }

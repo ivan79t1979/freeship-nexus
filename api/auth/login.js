@@ -18,14 +18,14 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const isValidPassword = await User.verifyPassword(password, user.password_hash);
-    if (!isValidPassword) {
+    const isPasswordValid = await User.verifyPassword(password, user.password_hash);
+    if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const token = generateToken(user.id);
 
-    res.json({
+    res.status(200).json({
       message: 'Login successful',
       token,
       user: { id: user.id, email: user.email }

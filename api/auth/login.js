@@ -1,5 +1,5 @@
-import { User } from '../../../lib/database.js';
-import { generateToken } from '../../../lib/auth.js';
+import { User } from '../../lib/database.js';
+import { generateToken } from '../../lib/auth.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

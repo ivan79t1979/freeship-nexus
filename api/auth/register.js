@@ -1,4 +1,4 @@
-import { User, initializeDatabase } from '../../lib/database.js';
+import { User } from '../../lib/database.js';
 import { generateToken } from '../../lib/auth.js';
 
 export default async function handler(req, res) {
@@ -7,7 +7,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    await initializeDatabase();
+    // The database initialization should be handled by Vercel's database integration or a migration script,
+    // not on every API request. If you are using Vercel Postgres, ensure your environment variables are set.
+    // await initializeDatabase(); // Removed this line
     const { email, password } = req.body;
 
     if (!email || !password) {

@@ -1,5 +1,5 @@
-import { Product } from '../../../lib/database.js';
-import { verifyToken } from '../../../lib/auth.js';
+import { Product } from '../../lib/database.js';
+import { verifyToken } from '../../lib/auth.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
